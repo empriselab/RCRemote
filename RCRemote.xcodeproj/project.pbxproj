@@ -11,6 +11,7 @@
 		F61702D02C49B20800B00ED9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61702CF2C49B20800B00ED9 /* ContentView.swift */; };
 		F61702D22C49B20A00B00ED9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F61702D12C49B20A00B00ED9 /* Assets.xcassets */; };
 		F61702D52C49B20A00B00ED9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F61702D42C49B20A00B00ED9 /* Preview Assets.xcassets */; };
+		F61702DC2C49B9E000B00ED9 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61702DB2C49B9E000B00ED9 /* UIColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		F61702CF2C49B20800B00ED9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F61702D12C49B20A00B00ED9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F61702D42C49B20A00B00ED9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F61702DB2C49B9E000B00ED9 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,9 +53,10 @@
 		F61702CC2C49B20800B00ED9 /* RCRemote */ = {
 			isa = PBXGroup;
 			children = (
-				F61702CD2C49B20800B00ED9 /* RCRemoteApp.swift */,
 				F61702CF2C49B20800B00ED9 /* ContentView.swift */,
+				F61702CD2C49B20800B00ED9 /* RCRemoteApp.swift */,
 				F61702D12C49B20A00B00ED9 /* Assets.xcassets */,
+				F61702DB2C49B9E000B00ED9 /* UIColor.swift */,
 				F61702D32C49B20A00B00ED9 /* Preview Content */,
 			);
 			path = RCRemote;
@@ -138,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F61702D02C49B20800B00ED9 /* ContentView.swift in Sources */,
+				F61702DC2C49B9E000B00ED9 /* UIColor.swift in Sources */,
 				F61702CE2C49B20800B00ED9 /* RCRemoteApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,6 +276,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RCRemote/Preview Content\"";
+				DEVELOPMENT_TEAM = 24T84N3MAY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -300,6 +305,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RCRemote/Preview Content\"";
+				DEVELOPMENT_TEAM = 24T84N3MAY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
