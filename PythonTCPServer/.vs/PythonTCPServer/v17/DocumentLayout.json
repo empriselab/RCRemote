@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Liu\\PythonTCPServer\\",
+  "WorkspaceRootPath": "C:\\Users\\Liu\\RCRemote\\PythonTCPServer\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Liu\\PythonTCPServer\\server.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Liu\\RCRemote\\PythonTCPServer\\server.py||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:server.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
@@ -20,9 +20,9 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "server.py",
-              "DocumentMoniker": "C:\\Users\\Liu\\PythonTCPServer\\server.py",
+              "DocumentMoniker": "C:\\Users\\Liu\\RCRemote\\PythonTCPServer\\server.py",
               "RelativeDocumentMoniker": "server.py",
-              "ToolTip": "C:\\Users\\Liu\\PythonTCPServer\\server.py",
+              "ToolTip": "C:\\Users\\Liu\\RCRemote\\PythonTCPServer\\server.py",
               "RelativeToolTip": "server.py",
               "ViewState": "AQIAAA8AAAAAAAAAAAAAACIAAAAXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
