@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct RCRemoteApp: App {
+    @StateObject private var webSocketManager = WebSocketManager()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            ContentView()
+            ConnectView()
+                .environmentObject(webSocketManager)
         }
     }
 }

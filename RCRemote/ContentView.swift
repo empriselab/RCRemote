@@ -11,7 +11,8 @@ import CoreMotion
 // MARK: Get motion data
 class MotionManager: ObservableObject {
     private var motionManager = CMMotionManager()
-    private var lastData: CMDeviceMotion? // calculate the changes
+    private var lastData: CMDeviceMotion? // calculate the change
+    private var webSocketManager: WebSocketManager?
     
     // data collected
     @Published var orientationChange = (x: 0.0, y: 0.0, z: 0.0)
@@ -28,20 +29,22 @@ class MotionManager: ObservableObject {
     // high/low precision
     @Published var highPrecision = false
     
+    init(webSocketManager: WebSocketManager) {
+        self.webSocketManager = webSocketManager
+    }
+    
     // func: start collect data
     // set: fps
     func startSensors() {
         print("Starting sensors...")
-        motionManager.deviceMotionUpdateInterval = 1.0 / 60.0
+        motionManager.deviceMotionUpdateInterval = 1.0 / 1.0
         motionManager.startDeviceMotionUpdates(to: .main) { [weak self] (data, error) in
             guard let self = self, let data = data, error == nil else {
                 print("Error: \(error?.localizedDescription ?? "Unknown error")")
                 return
             }
-
-            if self.isCollecting {
-                self.processSensorData(data)
-            }
+            print("Start process data")
+            self.processSensorData(data)
         }
     }
 
@@ -67,6 +70,20 @@ class MotionManager: ObservableObject {
         }
         
         self.lastData = data  // update changes
+        
+        // 每次更新数据后立即发送
+        if isCollecting {
+            sendData()
+        }
+    }
+    
+    private func sendData() {
+        webSocketManager?.sendSensorData(
+            orie: (x: orientationChange.x, y: orientationChange.y, z: orientationChange.z),
+            pitch: pitchChange,
+            roll: rollChange,
+            gripper: gripperValue
+        )
     }
 
     // func: clean the data
@@ -77,14 +94,17 @@ class MotionManager: ObservableObject {
         pitchChange = 0.0
         rollChange = 0.0
         print("All reset!")
-        startSensors()
     }
 }
 
 // MARK: View Controller
 struct ContentView: View {
-    @StateObject var motionManager = MotionManager()
-    @State var isCollecting = false
+    @EnvironmentObject var webSocketManager: WebSocketManager
+    @StateObject var motionManager: MotionManager
+    
+    init() {
+        _motionManager = StateObject(wrappedValue: MotionManager(webSocketManager: WebSocketManager()))
+    }
 
     var body: some View {
         GeometryReader { geometry in
