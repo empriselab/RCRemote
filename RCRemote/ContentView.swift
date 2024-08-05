@@ -5,6 +5,7 @@
 //  Created by Qiandao Liu on 7/18/24.
 //
 
+import Foundation
 import SwiftUI
 import CoreMotion
 
@@ -43,7 +44,6 @@ class MotionManager: ObservableObject {
                 print("Error: \(error?.localizedDescription ?? "Unknown error")")
                 return
             }
-            print("Start process data")
             self.processSensorData(data)
         }
     }
@@ -70,20 +70,6 @@ class MotionManager: ObservableObject {
         }
         
         self.lastData = data  // update changes
-        
-        // 每次更新数据后立即发送
-        if isCollecting {
-            sendData()
-        }
-    }
-    
-    private func sendData() {
-        webSocketManager?.sendSensorData(
-            orie: (x: orientationChange.x, y: orientationChange.y, z: orientationChange.z),
-            pitch: pitchChange,
-            roll: rollChange,
-            gripper: gripperValue
-        )
     }
 
     // func: clean the data
@@ -103,7 +89,9 @@ struct ContentView: View {
     @StateObject var motionManager: MotionManager
     
     init() {
-        _motionManager = StateObject(wrappedValue: MotionManager(webSocketManager: WebSocketManager()))
+        let webSocketManager = WebSocketManager()
+        let motionManager = MotionManager(webSocketManager: webSocketManager)
+        _motionManager = StateObject(wrappedValue: motionManager)
     }
 
     var body: some View {

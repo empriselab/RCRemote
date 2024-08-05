@@ -25,7 +25,7 @@ struct ConnectView: View {
                     .keyboardType(.numberPad)
                 Button("Connect") {
                     guard !address.isEmpty, !port.isEmpty else {
-                        connectionStatus = "Please fill in all fields."
+                        connectionStatus = "Please fill Address + Port"
                         return
                     }
                     connectToServer()
