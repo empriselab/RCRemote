@@ -1,35 +1,40 @@
 import asyncio
 import websockets
 
+async def heartbeat(websocket, interval=10):
+    try:
+        while websocket.open:
+            await asyncio.sleep(interval)
+            await websocket.send("ping")
+            print("Heartbeat sent.")
+    except asyncio.CancelledError:
+        print("Heartbeat task cancelled.")
+    except websockets.ConnectionClosed:
+        print("WebSocket closed, stopping heartbeat.")
+
 async def handle_client(websocket, path):
     print("Client connected.")
+    heartbeat_task = asyncio.create_task(heartbeat(websocket))
     try:
         async for message in websocket:
-            if message == "Test Connection":
-                print(message)
+            if message.startswith("Data: "):
+                print(f"Data received: {message}")
+                await websocket.send("received")
+            elif message == "Test Connection":
+                print("Connection test received.")
                 await websocket.send("Connection Established")
             else:
-                # 解析坐标数据
-                data = message.split(", ")
-                orie_data = data[0].replace("Data: ", "").split(", ")
-                orie = tuple(map(float, orie_data))
-                pitch = float(data[1].replace("Pitch: ", ""))
-                roll = float(data[2].replace("Roll: ", ""))
-                gripper = float(data[3].replace("Gripper: ", ""))
-                print(message)
-    except websockets.ConnectionClosed:
-        print("Client disconnected")
-    
-async def status_monitor():
-    while True:
-        await asyncio.sleep(5)
-        print("Still running...")
+                print("Received unknown message.")
+    except websockets.ConnectionClosed as e:
+        print("Client disconnected with exception")
+    finally:
+        heartbeat_task.cancel()
 
 async def main():
-    server = websockets.serve(handle_client, "192.168.58.101", 1145)
-    monitor = status_monitor()
-    await asyncio.gather(server, monitor)  # Run both the server and the status monitor concurrently
+    async with websockets.serve(handle_client, "10.48.160.1", 1145):
+        print("Server running...")
+        await asyncio.Future()
 
 if __name__ == "__main__":
-    print("Start runing...")
     asyncio.run(main())
+
