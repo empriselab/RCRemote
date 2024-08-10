@@ -12,8 +12,6 @@ class WebSocketManager: ObservableObject {
     @Published var isConnected = false  // 新增: 用于监控连接状态
     private var webSocketTask: URLSessionWebSocketTask?
     private let urlSession = URLSession(configuration: .default)
-    private var timer: Timer?
-
     
     // 更新: 连接WebSocket
     func connect(address: String, port: String) {
@@ -57,6 +55,7 @@ class WebSocketManager: ObservableObject {
                 case .success(let message):
                     if case .string(let text) = message {
                         self?.handleReceivedMessage(text)
+                        self?.receiveMessage()  // 递归调用，继续接收下一条消息
                     }
                 }
             }
@@ -69,19 +68,13 @@ class WebSocketManager: ObservableObject {
         case "Connection Established":
             isConnected = true
             connectionError = false
-            startSendingData()
+            sendSensorData()  // 开始发送第一条传感器数据
         case "received":
             // 服务器确认数据接收，继续发送下一批数据
+            print("received")
             sendSensorData()
         default:
             print("Received: \(message)")
-        }
-    }
-    
-    // 开始发送传感器数据
-    private func startSendingData() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
-            self?.sendSensorData()
         }
     }
     
@@ -89,20 +82,14 @@ class WebSocketManager: ObservableObject {
     private func sendSensorData() {
         let dataMessage = "Data: X=\(Int.random(in: 0...100)), Y=\(Int.random(in: 0...100)), Z=\(Int.random(in: 0...100))"
         sendMessage(message: dataMessage)
+        
     }
-    
-//    // 发送实时数据到服务器
-//    func sendSensorData(orieX: Double, orieY: Double, orieZ: Double, pitch: Double, roll: Double) {
-//        let dataMessage = "Data: OrieX=\(orieX), OrieY=\(orieY), OrieZ=\(orieZ), Pitch=\(pitch), Roll=\(roll)"
-//        sendMessage(message: dataMessage)
-//    }
     
     // 断开连接
     func disconnect() {
         webSocketTask?.cancel(with: .goingAway, reason: nil)
         isConnected = false
         connectionError = false
-        timer?.invalidate()
         print("WebSocket disconnected")
     }
 }
