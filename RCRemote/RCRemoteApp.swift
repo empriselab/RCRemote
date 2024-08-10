@@ -14,9 +14,8 @@ struct RCRemoteApp: App {
     
     var body: some Scene {
         WindowGroup {
-//            ContentView()
-            ConnectView()
-                .environmentObject(webSocketManager)
+            ContentView()
+                .environmentObject(WebSocketManager())  // 注入 WebSocketManager
         }
     }
 }

@@ -13,7 +13,6 @@
 		F61702D52C49B20A00B00ED9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F61702D42C49B20A00B00ED9 /* Preview Assets.xcassets */; };
 		F61702DC2C49B9E000B00ED9 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61702DB2C49B9E000B00ED9 /* UIColor.swift */; };
 		F6B12F672C5EE94400494684 /* WebSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B12F662C5EE94400494684 /* WebSocketManager.swift */; };
-		F6B12F692C5EEDF300494684 /* ConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B12F682C5EEDF300494684 /* ConnectView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,7 +23,6 @@
 		F61702D42C49B20A00B00ED9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F61702DB2C49B9E000B00ED9 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		F6B12F662C5EE94400494684 /* WebSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketManager.swift; sourceTree = "<group>"; };
-		F6B12F682C5EEDF300494684 /* ConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +55,6 @@
 		F61702CC2C49B20800B00ED9 /* RCRemote */ = {
 			isa = PBXGroup;
 			children = (
-				F6B12F682C5EEDF300494684 /* ConnectView.swift */,
 				F6B12F662C5EE94400494684 /* WebSocketManager.swift */,
 				F61702CF2C49B20800B00ED9 /* ContentView.swift */,
 				F61702CD2C49B20800B00ED9 /* RCRemoteApp.swift */,
@@ -149,7 +146,6 @@
 				F61702D02C49B20800B00ED9 /* ContentView.swift in Sources */,
 				F61702DC2C49B9E000B00ED9 /* UIColor.swift in Sources */,
 				F61702CE2C49B20800B00ED9 /* RCRemoteApp.swift in Sources */,
-				F6B12F692C5EEDF300494684 /* ConnectView.swift in Sources */,
 				F6B12F672C5EE94400494684 /* WebSocketManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

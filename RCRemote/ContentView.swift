@@ -13,7 +13,6 @@ import CoreMotion
 class MotionManager: ObservableObject {
     private var motionManager = CMMotionManager()
     private var lastData: CMDeviceMotion? // calculate the change
-    private var webSocketManager: WebSocketManager?
     
     // data collected
     @Published var orientationChange = (x: 0.0, y: 0.0, z: 0.0)
@@ -29,10 +28,6 @@ class MotionManager: ObservableObject {
     
     // high/low precision
     @Published var highPrecision = false
-    
-    init(webSocketManager: WebSocketManager) {
-        self.webSocketManager = webSocketManager
-    }
     
     // func: start collect data
     // set: fps
@@ -83,14 +78,16 @@ class MotionManager: ObservableObject {
     }
 }
 
+
 // MARK: View Controller
 struct ContentView: View {
     @EnvironmentObject var webSocketManager: WebSocketManager
     @StateObject var motionManager: MotionManager
+    @State private var serverAddress: String = ""
+    @State private var serverPort: String = ""
     
     init() {
-        let webSocketManager = WebSocketManager()
-        let motionManager = MotionManager(webSocketManager: webSocketManager)
+        let motionManager = MotionManager()
         _motionManager = StateObject(wrappedValue: motionManager)
     }
 
@@ -103,6 +100,42 @@ struct ContentView: View {
                 .padding()
                 .position(x: geometry.size.width * 0.35, y: geometry.size.height * 0.05)
         
+            // Server address input
+            TextField("Address", text: $serverAddress)
+                .keyboardType(.decimalPad)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+                .frame(width: geometry.size.width * 0.7, height: 40)
+                .position(x: geometry.size.width * 0.4, y: geometry.size.height * 0.13)
+            
+            // Server port input
+            TextField("Port", text: $serverPort)
+                .keyboardType(.numberPad)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+                .frame(width: geometry.size.width * 0.7, height: 40)
+                .position(x: geometry.size.width * 0.4, y: geometry.size.height * 0.19)
+            
+            // Refresh/connect button
+            Button("🔄") {
+                webSocketManager.connect(address: serverAddress, port: serverPort)
+            }
+            .padding(.vertical, 20)
+            .padding(.horizontal, 22)
+
+            .background(Color.ownWhite)
+            .cornerRadius(8)
+            .font(.system(size: 35, weight: .bold, design: .default))
+            .frame(width: geometry.size.width * 0.9, height: 40)
+            .position(x: geometry.size.width * 0.82, y: geometry.size.height * 0.16)
+            
+
+//            if webSocketManager.isConnected {
+//                Text("Connected")
+//            } else {
+//                Text("Disconnected")
+//            }
+            
             // MARK: Display Sensor Data
             VStack(spacing: 20) {
                 Text("Orie: X \(motionManager.orientationChange.x, specifier: motionManager.highPrecision ? "%.6f" : "%.2f"), Y \(motionManager.orientationChange.y, specifier: motionManager.highPrecision ? "%.6f" : "%.2f"), Z \(motionManager.orientationChange.z, specifier: motionManager.highPrecision ? "%.6f" : "%.2f")")
@@ -116,7 +149,7 @@ struct ContentView: View {
             .font(.body)
             .cornerRadius(5)
             .frame(width: geometry.size.width)
-            .position(x: geometry.size.width / 2, y: geometry.size.height * 0.3)
+            .position(x: geometry.size.width / 2, y: geometry.size.height * 0.37)
             
             // MARK: Reset Button
             Button("Reset") {
