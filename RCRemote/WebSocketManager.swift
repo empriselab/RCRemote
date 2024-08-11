@@ -11,9 +11,11 @@ class WebSocketManager: ObservableObject {
     @Published var connectionError = false  // 用于检测是否有error，报错而不至于让程序直接崩溃
     @Published var isConnected = false  // 新增: 用于监控连接状态
     @Published var highPrecision = false  // 控制数据精度
+    @Published var networkDelay: Int = 0  // 网络延迟，以毫秒为单位
     
     private var webSocketTask: URLSessionWebSocketTask?
     private let urlSession = URLSession(configuration: .default)
+    private var lastSendTime: Date?  // 记录上次发送数据的时间
     
     // Properties for sensor data
     @Published var orientationChange = (x: 0.0, y: 0.0, z: 0.0)
@@ -89,7 +91,12 @@ class WebSocketManager: ObservableObject {
             sendSensorData()  // 开始发送第一条传感器数据
         case "received":
             // 服务器确认数据接收，继续发送下一批数据
-            print("received")
+            if let lastSendTime = lastSendTime {
+                let delay = Date().timeIntervalSince(lastSendTime)
+                DispatchQueue.main.async {
+                    self.networkDelay = Int(delay * 1000)  // 转换为毫秒
+                }
+            }
             sendSensorData()
         default:
             print("Received: \(message)")
@@ -105,6 +112,7 @@ class WebSocketManager: ObservableObject {
     private func sendSensorData() {
         let format = highPrecision ? "%.6f" : "%.3f"
         let dataMessage = "Data: OrieX=\(String(format: format, orientationChange.x)), OrieY=\(String(format: format, orientationChange.y)), OrieZ=\(String(format: format, orientationChange.z)), Pitch=\(String(format: format, pitchChange)), Roll=\(String(format: format, rollChange)), Gripper=\(Int(gripperValue))"
+        lastSendTime = Date()  // 更新发送时间
         sendMessage(message: dataMessage)
     }
     

@@ -88,10 +88,19 @@ struct ContentView: View {
     @StateObject var motionManager: MotionManager
     @State private var serverAddress: String = ""
     @State private var serverPort: String = ""
+    @State private var displayedDelay: Int = 0
+    @State private var timer: Timer?
     
     init() {
         let motionManager = MotionManager()
         _motionManager = StateObject(wrappedValue: motionManager)
+    }
+    
+    // 初始化 Timer
+    private func setupTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            self.displayedDelay = self.webSocketManager.networkDelay
+        }
     }
 
     var body: some View {
@@ -139,7 +148,17 @@ struct ContentView: View {
             .frame(width: geometry.size.width * 0.9, height: 40)
             .position(x: geometry.size.width * 0.82, y: geometry.size.height * 0.16)
             
-
+            Text("📶 \(displayedDelay) ms")
+                .padding()
+                .foregroundColor(Color.ownDeepGreen)
+                .font(.headline)
+                .position(x: geometry.size.width * 0.82, y: geometry.size.height * 0.055)
+                .onAppear {
+                    self.setupTimer()
+                }
+                .onDisappear {
+                    self.timer?.invalidate()  // 确保在视图消失时停止定时器
+                }
             
             // MARK: Display Sensor Data
             VStack(spacing: 20) {
@@ -257,6 +276,6 @@ struct ContentView: View {
 }
 
 
-#Preview {
-    ContentView()
-}
+//#Preview {
+//    ContentView()
+//}
