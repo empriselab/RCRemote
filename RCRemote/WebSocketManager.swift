@@ -11,7 +11,7 @@ class WebSocketManager: ObservableObject {
     @Published var connectionError = false  // 用于检测是否有error，报错而不至于让程序直接崩溃
     @Published var isConnected = false  // 新增: 用于监控连接状态
     @Published var highPrecision = false  // 控制数据精度
-    @Published var networkDelay: Int = 0  // 网络延迟，以毫秒为单位
+    @Published var networkDelay: Int = 0
     
     private var webSocketTask: URLSessionWebSocketTask?
     private let urlSession = URLSession(configuration: .default)
@@ -48,7 +48,7 @@ class WebSocketManager: ObservableObject {
         webSocketTask = urlSession.webSocketTask(with: url)
         webSocketTask?.resume()
         receiveMessage()  // 开始接收消息
-        sendMessage(message: "Test Connection")  // 测试连接
+        sendMessage(message: "Test Connection")
     }
     
     // 更新: 发送消息
@@ -84,7 +84,7 @@ class WebSocketManager: ObservableObject {
         }
     }
     
-    // 新增: 处理接收到的消息
+    // 处理接收到的消息
     private func handleReceivedMessage(_ message: String) {
         switch message {
         case "Connection Established":
@@ -105,7 +105,7 @@ class WebSocketManager: ObservableObject {
         }
     }
     
-    // 方法来更新精度
+    // 更新精度
     func updatePrecision(high: Bool) {
         highPrecision = high
     }
