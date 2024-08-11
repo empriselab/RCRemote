@@ -10,6 +10,8 @@ import Foundation
 class WebSocketManager: ObservableObject {
     @Published var connectionError = false  // 用于检测是否有error，报错而不至于让程序直接崩溃
     @Published var isConnected = false  // 新增: 用于监控连接状态
+    @Published var highPrecision = false  // 控制数据精度
+    
     private var webSocketTask: URLSessionWebSocketTask?
     private let urlSession = URLSession(configuration: .default)
     
@@ -94,18 +96,17 @@ class WebSocketManager: ObservableObject {
         }
     }
     
+    // 方法来更新精度
+    func updatePrecision(high: Bool) {
+        highPrecision = high
+    }
+    
     // 发送传感器数据
     private func sendSensorData() {
-        let dataMessage = "Data: OrieX=\(orientationChange.x), OrieY=\(orientationChange.y), OrieZ=\(orientationChange.z), Pitch=\(pitchChange), Roll=\(rollChange), Gripper=\(gripperValue)"
-        print("local data")
+        let format = highPrecision ? "%.6f" : "%.3f"
+        let dataMessage = "Data: OrieX=\(String(format: format, orientationChange.x)), OrieY=\(String(format: format, orientationChange.y)), OrieZ=\(String(format: format, orientationChange.z)), Pitch=\(String(format: format, pitchChange)), Roll=\(String(format: format, rollChange)), Gripper=\(Int(gripperValue))"
         sendMessage(message: dataMessage)
     }
-  
-//    // WebSocketManager 中的 sendSensorData 方法更新
-//    func sendSensorData(orieX: Double, orieY: Double, orieZ: Double, pitch: Double, roll: Double, gripper: Double) {
-//        let dataMessage = "Data: OrieX=\(orieX), OrieY=\(orieY), OrieZ=\(orieZ), Pitch=\(pitch), Roll=\(roll), Gripper=\(gripper)"
-//        sendMessage(message: dataMessage)
-//    }
     
     // 断开连接
     func disconnect() {

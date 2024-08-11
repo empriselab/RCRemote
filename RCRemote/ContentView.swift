@@ -143,9 +143,9 @@ struct ContentView: View {
             
             // MARK: Display Sensor Data
             VStack(spacing: 20) {
-                Text("Orie: X \(motionManager.orientationChange.x, specifier: motionManager.highPrecision ? "%.6f" : "%.2f"), Y \(motionManager.orientationChange.y, specifier: motionManager.highPrecision ? "%.6f" : "%.2f"), Z \(motionManager.orientationChange.z, specifier: motionManager.highPrecision ? "%.6f" : "%.2f")")
-                Text("Pitch: \(motionManager.pitchChange, specifier: motionManager.highPrecision ? "%.6f" : "%.2f")")
-                Text("Roll: \(motionManager.rollChange, specifier: motionManager.highPrecision ? "%.6f" : "%.2f")")
+                Text("Orie: X \(motionManager.orientationChange.x, specifier: motionManager.highPrecision ? "%.6f" : "%.3f"), Y \(motionManager.orientationChange.y, specifier: motionManager.highPrecision ? "%.6f" : "%.3f"), Z \(motionManager.orientationChange.z, specifier: motionManager.highPrecision ? "%.6f" : "%.3f")")
+                Text("Pitch: \(motionManager.pitchChange, specifier: motionManager.highPrecision ? "%.6f" : "%.3f")")
+                Text("Roll: \(motionManager.rollChange, specifier: motionManager.highPrecision ? "%.6f" : "%.3f")")
                 Text("Gripper: \(Int(motionManager.gripperValue))")
             }
             .padding()
@@ -191,6 +191,7 @@ struct ContentView: View {
             // MARK: high/low precision
             Button("Precise") {
                 motionManager.highPrecision.toggle()
+                webSocketManager.updatePrecision(high: motionManager.highPrecision)
             }
             .padding()
             .background(Color.ownBlue)
