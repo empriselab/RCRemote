@@ -13,6 +13,7 @@ import CoreMotion
 class MotionManager: ObservableObject {
     private var motionManager = CMMotionManager()
     private var lastData: CMDeviceMotion? // calculate the change
+    var webSocketManager: WebSocketManager?
     
     // data collected
     @Published var orientationChange = (x: 0.0, y: 0.0, z: 0.0)
@@ -33,7 +34,7 @@ class MotionManager: ObservableObject {
     // set: fps
     func startSensors() {
         print("Starting sensors...")
-        motionManager.deviceMotionUpdateInterval = 1.0 / 1.0
+        motionManager.deviceMotionUpdateInterval = 1.0 / 60.0
         motionManager.startDeviceMotionUpdates(to: .main) { [weak self] (data, error) in
             guard let self = self, let data = data, error == nil else {
                 print("Error: \(error?.localizedDescription ?? "Unknown error")")
@@ -65,6 +66,8 @@ class MotionManager: ObservableObject {
         }
         
         self.lastData = data  // update changes
+        
+        webSocketManager?.updateData(orieX: self.orientationChange.x, orieY: self.orientationChange.y, orieZ: self.orientationChange.z, pitch: self.pitchChange, roll: self.rollChange, gripper: self.gripperValue)
     }
 
     // func: clean the data
@@ -92,6 +95,13 @@ struct ContentView: View {
     }
 
     var body: some View {
+        
+        // Preuse webSocketManager in contentView
+        Text("")
+            .onAppear {
+                self.motionManager.webSocketManager = self.webSocketManager
+            }
+        
         GeometryReader { geometry in
             // MARK: Title
             Text("RC - Remote")
@@ -130,11 +140,6 @@ struct ContentView: View {
             .position(x: geometry.size.width * 0.82, y: geometry.size.height * 0.16)
             
 
-//            if webSocketManager.isConnected {
-//                Text("Connected")
-//            } else {
-//                Text("Disconnected")
-//            }
             
             // MARK: Display Sensor Data
             VStack(spacing: 20) {

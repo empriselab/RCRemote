@@ -13,6 +13,22 @@ class WebSocketManager: ObservableObject {
     private var webSocketTask: URLSessionWebSocketTask?
     private let urlSession = URLSession(configuration: .default)
     
+    // Properties for sensor data
+    @Published var orientationChange = (x: 0.0, y: 0.0, z: 0.0)
+    @Published var pitchChange = 0.0
+    @Published var rollChange = 0.0
+    @Published var gripperValue = 0.0
+    
+    func updateData(orieX: Double, orieY: Double, orieZ: Double, pitch: Double, roll: Double, gripper: Double) {
+        self.orientationChange.x = orieX
+        self.orientationChange.y = orieY
+        self.orientationChange.z = orieZ
+        self.pitchChange = pitch
+        self.rollChange = roll
+        self.gripperValue = gripper
+        print("Current sensor data - OrieX: \(self.orientationChange.x), OrieY: \(self.orientationChange.y), OrieZ: \(self.orientationChange.z), Pitch: \(self.pitchChange), Roll: \(self.rollChange), Gripper: \(self.gripperValue)")
+    }
+    
     // 更新: 连接WebSocket
     func connect(address: String, port: String) {
         guard let url = URL(string: "ws://\(address):\(port)") else {
@@ -80,10 +96,16 @@ class WebSocketManager: ObservableObject {
     
     // 发送传感器数据
     private func sendSensorData() {
-        let dataMessage = "Data: X=\(Int.random(in: 0...100)), Y=\(Int.random(in: 0...100)), Z=\(Int.random(in: 0...100))"
+        let dataMessage = "Data: OrieX=\(orientationChange.x), OrieY=\(orientationChange.y), OrieZ=\(orientationChange.z), Pitch=\(pitchChange), Roll=\(rollChange), Gripper=\(gripperValue)"
+        print("local data")
         sendMessage(message: dataMessage)
-        
     }
+  
+//    // WebSocketManager 中的 sendSensorData 方法更新
+//    func sendSensorData(orieX: Double, orieY: Double, orieZ: Double, pitch: Double, roll: Double, gripper: Double) {
+//        let dataMessage = "Data: OrieX=\(orieX), OrieY=\(orieY), OrieZ=\(orieZ), Pitch=\(pitch), Roll=\(roll), Gripper=\(gripper)"
+//        sendMessage(message: dataMessage)
+//    }
     
     // 断开连接
     func disconnect() {
