@@ -18,7 +18,7 @@ async def handle_client(websocket, path):
     try:
         async for message in websocket:
             if message.startswith("Data: "):
-                print(f"Data received: {message}")
+                print(message)
                 await websocket.send("received")
             elif message == "Test Connection":
                 print("Connection test received.")
@@ -31,7 +31,7 @@ async def handle_client(websocket, path):
         heartbeat_task.cancel()
 
 async def main():
-    async with websockets.serve(handle_client, "10.48.160.1", 1145):
+    async with websockets.serve(handle_client, "192.168.58.100", 1145):
         print("Server running...")
         await asyncio.Future()
 
