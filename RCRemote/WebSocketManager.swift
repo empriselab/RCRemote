@@ -22,15 +22,17 @@ class WebSocketManager: ObservableObject {
     @Published var pitchChange = 0.0
     @Published var rollChange = 0.0
     @Published var gripperValue = 0.0
+    @Published var height = 0.0  // 新增: 用于控制高度的变量
     
-    func updateData(orieX: Double, orieY: Double, orieZ: Double, pitch: Double, roll: Double, gripper: Double) {
+    func updateData(orieX: Double, orieY: Double, orieZ: Double, pitch: Double, roll: Double, gripper: Double, height: Double) {
         self.orientationChange.x = orieX
         self.orientationChange.y = orieY
         self.orientationChange.z = orieZ
         self.pitchChange = pitch
         self.rollChange = roll
         self.gripperValue = gripper
-        print("Current sensor data - OrieX: \(self.orientationChange.x), OrieY: \(self.orientationChange.y), OrieZ: \(self.orientationChange.z), Pitch: \(self.pitchChange), Roll: \(self.rollChange), Gripper: \(self.gripperValue)")
+        self.height = height
+        print("Current sensor data - OrieX: \(self.orientationChange.x), OrieY: \(self.orientationChange.y), OrieZ: \(self.orientationChange.z), Pitch: \(self.pitchChange), Roll: \(self.rollChange), Gripper: \(self.gripperValue), Height: \(self.height)")
     }
     
     // 更新: 连接WebSocket
@@ -111,7 +113,7 @@ class WebSocketManager: ObservableObject {
     // 发送传感器数据
     private func sendSensorData() {
         let format = highPrecision ? "%.6f" : "%.3f"
-        let dataMessage = "Data: OrieX=\(String(format: format, orientationChange.x)), OrieY=\(String(format: format, orientationChange.y)), OrieZ=\(String(format: format, orientationChange.z)), Pitch=\(String(format: format, pitchChange)), Roll=\(String(format: format, rollChange)), Gripper=\(Int(gripperValue))"
+        let dataMessage = "Data: OrieX=\(String(format: format, orientationChange.x)), OrieY=\(String(format: format, orientationChange.y)), OrieZ=\(String(format: format, orientationChange.z)), Pitch=\(String(format: format, pitchChange)), Roll=\(String(format: format, rollChange)), Gripper=\(Int(gripperValue)), Height=\(String(format: format, height))"
         lastSendTime = Date()  // 更新发送时间
         sendMessage(message: dataMessage)
     }

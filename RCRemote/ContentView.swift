@@ -20,6 +20,7 @@ class MotionManager: ObservableObject {
     @Published var pitchChange = 0.0
     @Published var rollChange = 0.0
     @Published var gripperValue: Double = 0.0  // gripper depth
+    @Published var armHeight: Double = 0.0  // Initial height of the arm
     
     // data filter
     @Published var isCollecting = false
@@ -67,16 +68,18 @@ class MotionManager: ObservableObject {
         
         self.lastData = data  // update changes
         
-        webSocketManager?.updateData(orieX: self.orientationChange.x, orieY: self.orientationChange.y, orieZ: self.orientationChange.z, pitch: self.pitchChange, roll: self.rollChange, gripper: self.gripperValue)
+        webSocketManager?.updateData(orieX: self.orientationChange.x, orieY: self.orientationChange.y, orieZ: self.orientationChange.z, pitch: self.pitchChange, roll: self.rollChange, gripper: self.gripperValue, height: self.armHeight)
     }
 
     // func: clean the data
     func resetData() {
         print("Reset data...")
         stopSensors()
-        orientationChange = (x: 0.0, y: 0.0, z: 0.0)
-        pitchChange = 0.0
-        rollChange = 0.0
+        self.isCollecting = false
+        self.orientationChange =  (x: 0.0, y: 0.0, z: 0.0)
+        self.pitchChange = 0.0
+        self.rollChange = 0.0
+        webSocketManager?.updateData(orieX: 0.0, orieY: 0.0, orieZ: 0.0, pitch: 0.0, roll: 0.0, gripper: self.gripperValue, height: 0.0)
         print("All reset!")
     }
 }
@@ -161,11 +164,12 @@ struct ContentView: View {
                 }
             
             // MARK: Display Sensor Data
-            VStack(spacing: 20) {
+            VStack(spacing: 15) {
                 Text("Orie: X \(motionManager.orientationChange.x, specifier: motionManager.highPrecision ? "%.6f" : "%.3f"), Y \(motionManager.orientationChange.y, specifier: motionManager.highPrecision ? "%.6f" : "%.3f"), Z \(motionManager.orientationChange.z, specifier: motionManager.highPrecision ? "%.6f" : "%.3f")")
                 Text("Pitch: \(motionManager.pitchChange, specifier: motionManager.highPrecision ? "%.6f" : "%.3f")")
                 Text("Roll: \(motionManager.rollChange, specifier: motionManager.highPrecision ? "%.6f" : "%.3f")")
                 Text("Gripper: \(Int(motionManager.gripperValue))")
+                Text("Height: \(motionManager.armHeight, specifier: "%.3f")")
             }
             .padding()
             .background(Color.white)
@@ -184,8 +188,8 @@ struct ContentView: View {
             .foregroundColor(.white)
             .font(.title)
             .cornerRadius(8)
-            .frame(width: geometry.size.width * 0.9, height: 40)
-            .position(x: geometry.size.width * 0.82, y: geometry.size.height * 0.55)
+            .frame(width: geometry.size.width * 0.9, height: 55)
+            .position(x: geometry.size.width * 0.2, y: geometry.size.height * 0.55)
             
             // MARK: ON/OFF Toggle Button
             Toggle(isOn: $motionManager.isCollecting) {
@@ -226,6 +230,13 @@ struct ContentView: View {
                 .padding()
                 .frame(width: geometry.size.width * 0.6)
                 .position(x: geometry.size.width * 0.69, y: geometry.size.height * 0.75)
+            
+            JoystickView(value: $motionManager.armHeight)
+                .frame(width: 20, height: 150)
+                .padding()
+                .background(Color.black.opacity(0.1))
+                .cornerRadius(50)
+                .position(x: geometry.size.width * 0.88, y: geometry.size.height * 0.45)
             
             // MARK: Orie Only
             Button("Orie") {
@@ -272,6 +283,38 @@ struct ContentView: View {
             .frame(width: geometry.size.width * 0.3, height: 55)
             .position(x: geometry.size.width * 0.8, y: geometry.size.height * 0.87)
         }
+    }
+}
+
+
+struct JoystickView: View {
+    @Binding var value: Double  // Bound to the vertical position
+    let range: ClosedRange<Double> = -1.0...1.0  // Joystick range
+    let neutralPosition: Double = 0.0  // Neutral position of the joystick
+
+    @GestureState private var isDragging = false
+
+    var body: some View {
+        GeometryReader { geometry in
+            Circle()
+                .frame(width: 30, height: 30)
+                .foregroundColor(isDragging ? .gray : .ownBlue)
+                .position(x: geometry.size.width / 2, y: geometry.size.height / 2 + CGFloat(value * 50))
+                .gesture(
+                    DragGesture()
+                        .updating($isDragging) { _, state, _ in
+                            state = true
+                        }
+                        .onChanged { gesture in
+                            let newHeight = gesture.translation.height
+                            self.value = max(min(Double(newHeight / 50), 1), -1)
+                        }
+                        .onEnded { _ in
+                            self.value = self.neutralPosition  // Reset to neutral on release
+                        }
+                )
+        }
+        .frame(width: 100, height: 100)  // Size of the joystick area
     }
 }
 
