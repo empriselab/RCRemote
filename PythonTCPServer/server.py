@@ -1,6 +1,16 @@
 import asyncio
 import websockets
 
+sensor_data = {
+    'OrieX': 0.0,
+    'OrieY': 0.0,
+    'OrieZ': 0.0,
+    'Pitch': 0.0,
+    'Roll': 0.0,
+    'Gripper': 0.0,
+    'Height': 0.0
+}
+
 async def heartbeat(websocket, interval=10):
     try:
         while websocket.open:
@@ -18,7 +28,8 @@ async def handle_client(websocket, path):
     try:
         async for message in websocket:
             if message.startswith("Data: "):
-                print(message)
+                update_sensor_data(message[len("Data: "):])
+                print(sensor_data)
                 await websocket.send("received")
             elif message == "Test Connection":
                 print("Connection test received.")
@@ -30,6 +41,13 @@ async def handle_client(websocket, path):
     finally:
         heartbeat_task.cancel()
 
+def update_sensor_data(data_str):
+    # 分割数据并更新字典
+    entries = data_str.split(", ")
+    for entry in entries:
+        key, value = entry.split("=")
+        sensor_data[key.strip()] = float(value)
+        
 async def main():
     async with websockets.serve(handle_client, "192.168.58.100", 1145):
         print("Server running...")

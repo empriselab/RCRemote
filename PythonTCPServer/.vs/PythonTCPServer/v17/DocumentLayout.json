@@ -5,6 +5,12 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Liu\\RCRemote\\PythonTCPServer\\server.py||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:server.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Liu\\kinova\\command.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Liu\\kinova\\RCRemote.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,8 +20,34 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "command.py",
+              "DocumentMoniker": "C:\\Users\\Liu\\kinova\\command.py",
+              "RelativeDocumentMoniker": "..\\..\\kinova\\command.py",
+              "ToolTip": "C:\\Users\\Liu\\kinova\\command.py",
+              "RelativeToolTip": "..\\..\\kinova\\command.py",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-08-11T23:49:45.861Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RCRemote.py",
+              "DocumentMoniker": "C:\\Users\\Liu\\kinova\\RCRemote.py",
+              "RelativeDocumentMoniker": "..\\..\\kinova\\RCRemote.py",
+              "ToolTip": "C:\\Users\\Liu\\kinova\\RCRemote.py",
+              "RelativeToolTip": "..\\..\\kinova\\RCRemote.py",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA8AAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-08-11T23:49:29.559Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -24,7 +56,7 @@
               "RelativeDocumentMoniker": "server.py",
               "ToolTip": "C:\\Users\\Liu\\RCRemote\\PythonTCPServer\\server.py",
               "RelativeToolTip": "server.py",
-              "ViewState": "AQIAABIAAAAAAAAAAAAAACQAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2024-08-01T20:36:05.353Z",
               "EditorCaption": ""
