@@ -27,3 +27,9 @@ After that, open the repository in Xcode, the structures looks like that:
 
 <img width="264" alt="Screenshot 2024-08-26 at 6 02 21 PM" src="https://github.com/user-attachments/assets/01e15cd5-743a-4218-b28f-da8fa19cc0a8">
 
+There's no need for you to modify the code, the only thing you may want to change is the refresh rate of sending command to Server, which you can find in Line 38, ContentView:
+```
+motionManager.deviceMotionUpdateInterval = 1.0 / 60.0
+```
+The default speed is 60 fps which is good for most of tasks, but you may change it higher.
+
