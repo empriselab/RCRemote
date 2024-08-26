@@ -47,8 +47,50 @@ Swich the Build device to iPad or iPhone, then click the Run button left:
 
 <img width="171" alt="Screenshot 2024-08-26 at 6 20 58 PM" src="https://github.com/user-attachments/assets/84648c22-7f72-4474-bbdc-771fa9d9c24b">
 
-First time may not build sccessful since even your mac trust the mobile device, the software still not trusted, so you need go to Settings - Privacy & Security to allow the installment. Then run the software again, you will see the software icon is already on your iPhone/iPad:
+First time may not build sccessful since even your mac trust the mobile device, the software still not trusted, so you need go to Settings - Privacy & Security to allow the installment. Then run the software again, you will see the software icon is already on your iPhone/iPad, witch means you've install the software on your device:
 
 ![IMG_472FE6B9C146-1](https://github.com/user-attachments/assets/b8e67e76-c32a-4508-9883-889769a16bbf)
 
 Congratulations! The setup part is all set~
+
+### Connection
+To connect iPhone/iPad to Unity scene to control robot, open Server/Client which one first is not important, you do following steps:
+
+##### For Server
+For Server, we first need to find the address and port for sending message.
+
+For Windows system, use command:
+```
+ipconfig
+```
+The address is line of number followed 'IPv4', for example: 
+```
+IPv4 Address. . . . . . . . . . . : 192.168.58.104
+```
+Then the address is 192.168.58.104 in this example.
+
+For Ubuntu system, use command:
+```
+ifconfig
+```
+The address is line of number followed 'inet', for example:
+```
+wlp4s0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.58.104  netmask 255.255.255.0  broadcast 192.168.58.255
+```
+Then the address is 192.168.58.104 in this example.
+
+After you find the address, open example_kinova_gen3_move.py, in Line 141:
+```
+loop.run_until_complete(websockets.serve(handle_client, "192.168.58.104", 1145))
+```
+Replace the 192.168.58.104 to your own address, number 1145 is the port, you can also modify the port to control multiple robot in different Unity scene.
+
+Then save the file, command:
+```
+conda activate rcareworld
+cd RCareWorld/pyrcareworld/pyrcareworld/demo/examples
+
+
+
+
