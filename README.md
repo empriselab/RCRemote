@@ -9,6 +9,7 @@ This project has two parts: Client(IPhone) & Server(Computer to run the Unity en
 * Server: Since the server is build on RCareWorld Unity executable file right now, so the requirement is the same as the requirements we have for PhyRC Challenge, which you can find it here: https://github.com/empriselab/RCareWorld/tree/phy-robo-care. Ubuntu system is recommanded, but can also run 
 
 ### Setup
+##### 1. Server Setup
 First guide to the RCareWorld repository https://github.com/empriselab/RCareWorld/tree/phy-robo-care, follow the README to get the environmnet we need.
 
 After your environment all set (make sure switch the branch to phy-robo-care), then get the Server code: 
@@ -18,6 +19,7 @@ git checkout Server
 ```
 In the Server branch, you will see a python file named: example_kinova_gen3_move.py which is the example file to show how to import WebSocket and robot command to Unity, you can copy it directly to RCareWorld/pyrcareworld/pyrcareworld/demo/examples/ or learn the stategy to control and robot in any unity executable file.
 
+##### 2. Client Setup
 About the client, first you have to find a macbook/iMac which can install Xcode 11.0 or higher, Xcode is a IOS software used to build IOS software which uses Swift language, After you install the Xcode 11.0 or higher, command:
 ```
 git clone https://github.com/empriselab/RCRemote.git
@@ -56,7 +58,7 @@ Congratulations! The setup part is all set~
 ### Connection
 To connect iPhone/iPad to Unity scene to control robot, open Server/Client which one first is not important, you do following steps:
 
-##### For Server
+##### 1. Server Connection
 For Server, we first need to find the address and port for sending message.
 
 For Windows system, use command:
@@ -89,8 +91,16 @@ Replace the 192.168.58.104 to your own address, number 1145 is the port, you can
 Then save the file, command:
 ```
 conda activate rcareworld
-cd RCareWorld/pyrcareworld/pyrcareworld/demo/examples
+cd RCareWorld/pyrcareworld/pyrcareworld/demo/examples/
+python example_kinova_gen3_move.py
+```
 
+Server is setup
+
+##### 2. Client Setup
+Open RCRemote in your iPhone/iPad, it should looks like that:
+
+![IMG_A49E18BE5BFE-1](https://github.com/user-attachments/assets/28300a09-4ba0-499b-b94c-a62414d7a72c)
 
 
 
