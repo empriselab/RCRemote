@@ -28,9 +28,10 @@ After that, open the repository in Xcode, the structures looks like that:
 <img width="264" alt="Screenshot 2024-08-26 at 6 02 21 PM" src="https://github.com/user-attachments/assets/01e15cd5-743a-4218-b28f-da8fa19cc0a8">
 
 Click the top blue RCRemote, in the setting page, choose the Personal team, you can use same Apple ID as your iPhone:
+
 <img width="1014" alt="Screenshot 2024-08-26 at 6 27 24 PM" src="https://github.com/user-attachments/assets/e163a3b6-4f94-4339-95e4-7bb8b5a791bf">
 
-There's no need for you to modify the code, the only thing you may want to change is the refresh rate of sending command to Server, which you can find in Line 38, ContentView:
+There's no need for you to modify the code, the only thing you may want to change is the refresh rate of sending command to Server, which you can find in ContentView, Line 38:
 ```
 motionManager.deviceMotionUpdateInterval = 1.0 / 60.0
 ```
@@ -46,4 +47,8 @@ Swich the Build device to iPad or iPhone, then click the Run button left:
 
 <img width="171" alt="Screenshot 2024-08-26 at 6 20 58 PM" src="https://github.com/user-attachments/assets/84648c22-7f72-4474-bbdc-771fa9d9c24b">
 
-First time may not build sccessful since even your mac trust the mobile device, the software still not trusted, so you need to goto Setting - 
+First time may not build sccessful since even your mac trust the mobile device, the software still not trusted, so you need go to Settings - Privacy & Security to allow the installment. Then run the software again, you will see the software icon is already on your iPhone/iPad:
+
+![IMG_472FE6B9C146-1](https://github.com/user-attachments/assets/b8e67e76-c32a-4508-9883-889769a16bbf)
+
+Congratulations! The setup part is all set~
