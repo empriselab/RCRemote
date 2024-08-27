@@ -5,7 +5,7 @@ Wireless IOS software to control the robot motion by Wifi
 ![Demo Animation](images/VID_20240826_205943.gif)
 
 
-Welcome to RCRemote, here's the several steps for your setup:
+Welcome to RCRemote, here are several steps for your setup:
 
 ### Hardware Requirements
 This project has two parts: Client (iPhone) & Server (Computer to run the Unity environment)
