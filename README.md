@@ -58,6 +58,8 @@ Congratulations! The setup part is all set~
 ### Connection
 To connect iPhone/iPad to Unity scene to control robot, open Server/Client which one first is not important, you do following steps:
 
+##### 0. Make sure both iPhone and Server is under the same Wifi.
+
 ##### 1. Server Connection
 For Server, we first need to find the address and port for sending message.
 
@@ -86,7 +88,7 @@ After you find the address, open example_kinova_gen3_move.py, in Line 141:
 ```
 loop.run_until_complete(websockets.serve(handle_client, "192.168.58.104", 1145))
 ```
-Replace the 192.168.58.104 to your own address, number 1145 is the port, you can also modify the port to control multiple robot in different Unity scene.
+Replace the 192.168.58.104 to your own address, number 1145 is the default port, you can also modify the port to control multiple robot in different Unity scene.
 
 Then save the file, command:
 ```
@@ -102,5 +104,20 @@ Open RCRemote in your iPhone/iPad, it should looks like that:
 
 ![IMG_A49E18BE5BFE-1](https://github.com/user-attachments/assets/28300a09-4ba0-499b-b94c-a62414d7a72c)
 
+Fill the address and port (default port is 1145), then click 🔄 button, the connection is all set and you can see the delay 📶, usually the delay is about 5ms, which depends on your Wifi speed.
 
+### Functions
 
+After connections, start use it!
+
+![IMG_277E1658A094-1](https://github.com/user-attachments/assets/13445ba5-b7c0-47bc-9a1b-b93780ff8d04)
+
+1. Fill the address & port (default port is 1145)
+2. **Refresh address:** connect to server, use this each time you change address/port/Wifi
+3. **Delay:** The network delay
+4. **Start Sensor:** Start to collect motions and data, robot start moving
+5. **Precise:** Use higher precise data, but meaningless since iPhone's sensor is not that precise
+6. **Reset:** Reset the sensor status, robot stop moving
+7. **Gripper Open/Close:** Control gripper open/close, we use simple api in the example example_kinova_gen3_move.py, gripper will open when the bar is over 499, but you can use better api to make gripper catch more precise.
+8. **Height:** Control the height of gripper, since we only use 3DoF right now.
+9. **Axis Lock:** Lock one or more axis to make robot only move in exact way.
