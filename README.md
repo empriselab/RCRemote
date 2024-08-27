@@ -1,6 +1,8 @@
 # RCRemote
 Wireless IOS software to control the robot motion by Wifi
 
+![Demo Animation](images/VID_20240826_202208.gif)
+
 Welcome to RCRemote, here's the several steps for your setup:
 
 ### Hardware Requirements
