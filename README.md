@@ -8,6 +8,7 @@ This project has two parts: Client(iPhone) & Server(Computer to run the Unity en
 * Client: Generally, you can run the software on any iOS devices like iPhone or iPad or some other Apple products with accelerator and CoreMotion sensors. Updates iPhone to iOS 13 or higher. Since the app is not on Apple Store, so you may need an extra macbook/iMac to download the software and transfer it to your iPhone/iPad.
 * Server: Since the server is build on RCareWorld Unity executable file right now, so the requirement is the same as the requirements we have for PhyRC Challenge, which you can find here: https://github.com/empriselab/RCareWorld/tree/phy-robo-care. Ubuntu system is highly recommanded.
 
+---
 ### Setup
 ##### 1. Server Setup
 First guide to the RCareWorld repository https://github.com/empriselab/RCareWorld/tree/phy-robo-care, follow the whole README instructions to get the environmnet we need. That may take 20 mins.
@@ -53,15 +54,16 @@ First time may not build sccessful since even your mac trust the mobile device, 
 
 **Congratulations! The setup part is all set~**
 
+---
 ### Connection
 To connect iPhone/iPad to Unity scene to control robot, open Server/Client which one first is not important, you do following steps:
 
 ##### 0. Make sure both iPhone and Server is under the same Wifi.
 
 ##### 1. Server Connection
-For Server, we first need to find the address and port for sending message.
+For Server, we first need to find the address and port.
 
-For Windows system, use command:
+**For Windows system**, use command:
 ```
 ipconfig
 ```
@@ -71,7 +73,7 @@ IPv4 Address. . . . . . . . . . . : 192.168.58.104
 ```
 Then the address is 192.168.58.104 in this example.
 
-For Ubuntu system, use command:
+**For Ubuntu system**, use command:
 ```
 ifconfig
 ```
@@ -81,6 +83,7 @@ wlp4s0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         inet 192.168.58.104  netmask 255.255.255.0  broadcast 192.168.58.255
 ```
 Then the address is 192.168.58.104 in this example.
+
 
 After you find the address, open example_kinova_gen3_move.py, in Line 141:
 ```
@@ -95,7 +98,7 @@ cd RCareWorld/pyrcareworld/pyrcareworld/demo/examples/
 python example_kinova_gen3_move.py
 ```
 
-Server is setup
+Server is setup.
 
 ##### 2. Client Setup
 Open RCRemote in your iPhone/iPad, it should looks like that:
@@ -104,6 +107,7 @@ Open RCRemote in your iPhone/iPad, it should looks like that:
 
 Fill the address and port (default port is 1145), then click 🔄 button, the connection is all set and you can see the delay 📶, usually the delay is about 5ms, which depends on your Wifi speed.
 
+---
 ### Functions
 
 After connections, start use it!
