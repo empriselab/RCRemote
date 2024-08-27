@@ -65,7 +65,7 @@ To connect iPhone/iPad to Unity scene to control robot, open Server/Client which
 ##### 1. Server Connection
 For Server, we first need to find the address and port.
 
-**For Windows system**, use command:
+* **For Windows system**, use command:
 ```
 ipconfig
 ```
@@ -75,7 +75,7 @@ IPv4 Address. . . . . . . . . . . : 192.168.58.104
 ```
 Then the address is 192.168.58.104 in this example.
 
-**For Ubuntu system**, use command:
+* **For Ubuntu system**, use command:
 ```
 ifconfig
 ```
