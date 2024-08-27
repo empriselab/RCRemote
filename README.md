@@ -2,7 +2,7 @@
 Wireless IOS software to control the robot motion by Wifi
 
 ![Demo Animation](images/VID_20240826_202208.gif)
-
+![Demo Animation](images/VID_20240826_205943.gif)
 Welcome to RCRemote, here's the several steps for your setup:
 
 ### Hardware Requirements
@@ -118,7 +118,7 @@ Fill the address and port (default port is 1145), then click 🔄 button, the co
 
 After connections, start using it!
 
-![Demo Animation](images/VID_20240826_202208.gif)
+![Demo Animation](images/VID_20240826_205943.gif)
 
 ![IMG_277E1658A094-1](https://github.com/user-attachments/assets/661ed72f-70c9-47bd-a3be-fc72c251e598)
 
