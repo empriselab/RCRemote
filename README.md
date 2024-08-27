@@ -6,7 +6,7 @@ Welcome to RCRemote, here's the several steps for your setup:
 ## Hardware Requirements
 This project has two parts: Client(IPhone) & Server(Computer to run the Unity environment)
 * Client: Generally, you can run the software on any iOS devices like iPhone or iPad or some other Apple products with accelerator and CoreMotion sensors. Updates iPhone to iOS 13 or higher. Since the app is not on Apple Store, so you may need an extra macbook/iMac to download the software and transfer it to your mobile devices.
-* Server: Since the server is build on RCareWorld Unity executable file right now, so the requirement is the same as the requirements we have for PhyRC Challenge, which you can find it here: https://github.com/empriselab/RCareWorld/tree/phy-robo-care. Ubuntu system is recommanded, but can also run 
+* Server: Since the server is build on RCareWorld Unity executable file right now, so the requirement is the same as the requirements we have for PhyRC Challenge, which you can find it here: https://github.com/empriselab/RCareWorld/tree/phy-robo-care. Ubuntu system is highly recommanded.
 
 ### Setup
 ##### 1. Server Setup
