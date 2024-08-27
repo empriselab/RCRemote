@@ -1,11 +1,11 @@
 # RCRemote
-Wireless IOS software to control the robot motion by WIFI
+Wireless IOS software to control the robot motion by Wifi
 
 Welcome to RCRemote, here's the several steps for your setup:
 
-## Hardware Requirements
+### Hardware Requirements
 This project has two parts: Client(iPhone) & Server(Computer to run the Unity environment)
-* Client: Generally, you can run the software on any iOS devices like iPhone or iPad or some other Apple products with accelerator and CoreMotion sensors. Updates iPhone to iOS 13 or higher. Since the app is not on Apple Store, so you may need an extra macbook/iMac to download the software and transfer it to your iPhone/iPad.
+* Client: Generally, you can run the software on any iOS devices like iPhone or iPad or some other Apple products with accelerator and CoreMotion sensors. Updates iPhone to iOS 13 or higher. Since the app is not on Apple Store, so you may need an extra macbook to download the software and transfer it to your iPhone/iPad.
 * Server: Since the server is build on RCareWorld Unity executable file right now, so the requirement is the same as the requirements we have for PhyRC Challenge, which you can find here: https://github.com/empriselab/RCareWorld/tree/phy-robo-care. Ubuntu system is highly recommanded.
 
 ---
@@ -21,7 +21,7 @@ git checkout Server
 In the Server branch, you will see a python file named: *example_kinova_gen3_move.py* which is the example file to show how to import WebSocket and robot command to Unity, **you can copy this file directly to *RCareWorld/pyrcareworld/pyrcareworld/demo/examples/*** or learn the stategies in the file to control robots in any other unity executable file.
 
 ##### 2. Client Setup
-About the client, first you have to find **a macbook/iMac** which can install Xcode 11.0 or higher, Xcode is used to build iOS software which uses Swift language, After you install the Xcode 11.0 or higher, command:
+About the client, first you have to find **a macbook** which can install Xcode 11.0 or higher, Xcode is used to build iOS software which uses Swift language, After you install the Xcode 11.0 or higher, command:
 ```
 git clone https://github.com/empriselab/RCRemote.git
 git checkout Software
@@ -125,4 +125,4 @@ After connections, start use it!
 9. **Axis Lock:** Lock one or more axis to make robot only move in exact way.
 
 ---
-Meet any problems? Contact me for support: ql342@cornell.edu
+Any problems? Contact me for support: ql342@cornell.edu
