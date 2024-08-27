@@ -4,14 +4,14 @@ Wireless IOS software to control the robot motion by Wifi
 Welcome to RCRemote, here's the several steps for your setup:
 
 ### Hardware Requirements
-This project has two parts: Client(iPhone) & Server(Computer to run the Unity environment)
-* Client: Generally, you can run the software on any iOS devices like iPhone or iPad or some other Apple products with accelerator and CoreMotion sensors. Updates iPhone to iOS 13 or higher. Since the app is not on Apple Store, so you may need an extra macbook to download the software and transfer it to your iPhone/iPad.
+This project has two parts: Client (iPhone) & Server (Computer to run the Unity environment)
+* Client: Generally, you can run the software on any iOS devices like iPhone or iPad or some other Apple products with accelerator and CoreMotion sensors. Update iPhone to iOS 13 or higher. Since the app is not on the Apple Store, you may need an extra MacBook to download the software and transfer it to your iPhone/iPad.
 * Server: Since the server is build on RCareWorld Unity executable file right now, so the requirement is the same as the requirements we have for PhyRC Challenge, which you can find here: https://github.com/empriselab/RCareWorld/tree/phy-robo-care. Ubuntu system is highly recommanded.
 
 ---
 ### Setup
 ##### 1. Server Setup
-First guide to the RCareWorld repository https://github.com/empriselab/RCareWorld/tree/phy-robo-care, follow the whole README instructions to get the environmnet we need. That may take 20 mins.
+First go to the RCareWorld repository https://github.com/empriselab/RCareWorld/tree/phy-robo-care, follow the whole README instructions to get the environmnet we need. That may take 20 mins.
 
 After your environment all set (You've already build all RCareWorld staff and run the test), make sure switch the branch to phy-robo-care, then get the Server code: 
 ```
@@ -110,9 +110,9 @@ Fill the address and port (default port is 1145), then click 🔄 button, the co
 ---
 ### Functions
 
-After connections, start use it!
+After connections, start using it!
 
-![IMG_277E1658A094-1](https://github.com/user-attachments/assets/13445ba5-b7c0-47bc-9a1b-b93780ff8d04)
+![Demo Animation](https://github.com/user-attachments/assets/13445ba5-b7c0-47bc-9a1b-b93780ff8d04)
 
 1. Fill the address & port (default port is 1145)
 2. **Refresh address:** connect to server, use this each time you change address/port/Wifi
