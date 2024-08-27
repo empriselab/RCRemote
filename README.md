@@ -112,7 +112,9 @@ Fill the address and port (default port is 1145), then click 🔄 button, the co
 
 After connections, start using it!
 
-![Demo Animation](https://github.com/user-attachments/assets/13445ba5-b7c0-47bc-9a1b-b93780ff8d04)
+![Demo Animation](images/VID_20240826_202208.gif)
+
+![IMG_277E1658A094-1](https://github.com/user-attachments/assets/661ed72f-70c9-47bd-a3be-fc72c251e598)
 
 1. Fill the address & port (default port is 1145)
 2. **Refresh address:** connect to server, use this each time you change address/port/Wifi
