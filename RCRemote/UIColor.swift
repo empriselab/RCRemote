@@ -5,6 +5,8 @@
 //  Created by Qiandao Liu on 4/27/24.
 //
 
+// This is own personal color file, easier to use
+
 import SwiftUI
 
 extension Color {
