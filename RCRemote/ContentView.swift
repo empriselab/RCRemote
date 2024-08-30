@@ -160,7 +160,7 @@ struct ContentView: View {
                     self.setupTimer()
                 }
                 .onDisappear {
-                    self.timer?.invalidate()  // 确保在视图消失时停止定时器
+                    self.timer?.invalidate()  // stop the timer when close
                 }
             
             // MARK: Display Sensor Data
