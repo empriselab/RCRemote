@@ -4,14 +4,6 @@ This script demonstrates the control of a Kinova Gen3 robotic arm with a Robotiq
 What it Implements:
 - Initializes the websocket server to start listen commands from IPhone client.
 - Initializes the environment with the Kinova Gen3 robotic arm and sets the simulation time step.
-- 手机头部向下倾斜（Pitch从0向-0.6降低）表示gripper前进，绝对数值越大，gripper前进变化量越多。
-- 手机头部向上抬高（Pitch从0向+0.6增加）表示gripper后退，绝对数值越大，gripper后退变化量越多。
-- 手机向左倾斜（Roll从0向-0.6降低）表示gripper向左，绝对数值越大，gripper向左变化量越多。
-- 手机向右倾斜（Roll从0向+0.6增加）表示gripper向右，绝对数值越大，gripper向右变化量越多。
-- 手机向左的水平旋转（Orie.z从0向+0.3增加）表示gripper水平向左旋转，手机向右的水平旋转（Orie.z从0向-0.3减少）表示gripper水平向右旋转。旋转意味着gripper的方位和robot方位的相对距离固定，做钟表运动。
-- height的数值为0的时候，gripper的高度不变，height的数值为正则gripper高度升高，为负则gripper高度降低。绝对数值越大，gripper抬升/降低变化量越多。
-- gripper的数值为0-999，当gripper的数值为0-499的时候，调用gripper.GripperClose()。当gripper的数值为500-999的时候，调用gripper.GripperOpen()。
-- The script continuously repeats the process by manipulating.
 
 Required Operations:
 - Loop: The script continuously performs pick-and-place operations in a loop.
@@ -70,12 +62,14 @@ box2.SetTransform(
     scale=[0.04, 0.04, 0.04],
 )
 
+# Split the message from Client to seperate data
 def update_sensor_data(data_str):
     entries = data_str.split(", ")
     for entry in entries:
         key, value = entry.split("=")
         sensor_data[key.strip()] = float(value)
 
+# Heartbeat func, send "ping" to Client per 10 seconds to prevent disconnection
 async def heartbeat(websocket, interval=10):
     try:
         while websocket.open:
@@ -87,6 +81,9 @@ async def heartbeat(websocket, interval=10):
     except websockets.ConnectionClosed:
         print("WebSocket closed, stopping heartbeat.")
 
+# Receive message from client and give different response depend on the content
+# If message is Data, call func update_sensor_data, response a "received" to Client.
+# If message is "Test Connection", response a "Connection Established" to Client.
 async def handle_client(websocket, path):
     print("Client connected.")
     heartbeat_task = asyncio.create_task(heartbeat(websocket))
@@ -106,9 +103,12 @@ async def handle_client(websocket, path):
     finally:
         heartbeat_task.cancel()
 
+# Transfer data to robot motion command
 def apply_robot_movement():
     print("START MOVE ROBOT")
 
+    # Get robot position first.
+    # should be change to a new api like gripper.data.get("position") to get gripper position instead of robot.
     currentPos = robot.data.get("position")
 
     while True:
@@ -123,7 +123,7 @@ def apply_robot_movement():
 
         robot.IKTargetDoMove(position=position, duration=0.0, speed_based=False)
         
-        # We only use this simple api here. But may achieve more precise motion later.
+        # We only use this simple api here. But you may achieve more precise motion later.
         if sensor_data['Gripper'] > 500.0:
             print("open")
             gripper.GripperOpen()
@@ -131,14 +131,16 @@ def apply_robot_movement():
             gripper.GripperClose()
             print("close")
 
+        # Update position once each step
         currentPos = position
 
         env.step()
 
+# Start the Websocket Looping to keep get/send message.
 def start_websocket_server():
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
-    loop.run_until_complete(websockets.serve(handle_client, "192.168.58.104", 1145))
+    loop.run_until_complete(websockets.serve(handle_client, "192.168.58.104", 1145))  # Change the address to your computer's IPv4 address.
     loop.run_forever()
 
 # Create and execute threads
