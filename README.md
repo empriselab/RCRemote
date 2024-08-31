@@ -74,30 +74,31 @@ For Server, we first need to find the address and port.
 ```
 ipconfig
 ```
-The address is line of number followed 'IPv4', for example: 
+The address is line of number followed 'IPv4', For example: 
 ```
 IPv4 Address. . . . . . . . . . . : 192.168.58.104
 ```
-Then the address is 192.168.58.104 in this example.
+Then the address is 192.168.58.104.
 
 * **For Ubuntu system**, use command:
 ```
 ifconfig
 ```
-The address is line of number followed 'inet', for example:
+The address is line of number followed 'inet', For example:
 ```
 wlp4s0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         inet 192.168.58.104  netmask 255.255.255.0  broadcast 192.168.58.255
 ```
-Then the address is 192.168.58.104 in this example.
+Then the address is 192.168.58.104.
 
 
 
-After you find the address, open example_kinova_gen3_move.py, in Line 141:
+After you find the address, open example_kinova_gen3_move.py, in Line 143:
 ```
 loop.run_until_complete(websockets.serve(handle_client, "192.168.58.104", 1145))
 ```
 Replace the 192.168.58.104 to your own address, number 1145 is the default port, you can also modify the port to control multiple robot in different Unity scene.
+**Important: Don't forget to change the address each time you switch Wifi or System, each time when you cannot make the connection, check address & port first.**
 
 Then save the file, command:
 ```
@@ -106,7 +107,7 @@ cd RCareWorld/pyrcareworld/pyrcareworld/demo/examples/
 python example_kinova_gen3_move.py
 ```
 
-Server is all set.
+Server is all set!
 
 #### 2. Client Setup
 Open RCRemote in your iPhone/iPad, it should looks like that:
@@ -114,6 +115,8 @@ Open RCRemote in your iPhone/iPad, it should looks like that:
 ![IMG_A49E18BE5BFE-1](https://github.com/user-attachments/assets/28300a09-4ba0-499b-b94c-a62414d7a72c)
 
 Fill the address and port (default port is 1145), then click 🔄 button, the connection is all set and you can see the delay 📶, usually the delay is about 5ms, which depends on your Wifi speed.
+
+Client is all set!
 
 ---
 ### Functions
