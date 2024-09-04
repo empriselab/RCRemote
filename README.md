@@ -65,7 +65,7 @@ First time may not build sccessful since even your mac trust the mobile device, 
 ### Connection
 To connect iPhone/iPad to Unity scene to control robot, open Server/Client which one first is not important, you do following steps:
 
-#### 0. Make sure both iPhone and Server is under the same Wifi.
+#### 0. Make sure both iPhone and Server are under the same Wifi.
 
 #### 1. Server Connection
 For Server, we first need to find the address and port.
