@@ -55,7 +55,7 @@ Switch the Build device to iPad or iPhone, then click the Run button left:
 <img width="171" alt="Screenshot 2024-08-26 at 6 20 58 PM" src="https://github.com/user-attachments/assets/84648c22-7f72-4474-bbdc-771fa9d9c24b">
 
 
-First time may not build sccessful since even your mac trust the mobile device, the software still not be trusted, so you need go to *Settings - Privacy & Security* to allow the installment. Then run the software again, you will see the software icon is already on your iPhone/iPad, witch means you've install the software on your device:
+First time may not build sccessful since even your mac trust the mobile device, the software and developer still not be trusted, so you need go to *Settings - Privacy & Security* to allow the installment. Go to *Settings - General - VPN & Device Management* to trust the developer. Then run the software again, first time takes few minutes, you will see the software icon is already on your iPhone/iPad, witch means you've install the software on your device:
 
 ![IMG_472FE6B9C146-1](https://github.com/user-attachments/assets/b8e67e76-c32a-4508-9883-889769a16bbf)
 
