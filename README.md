@@ -1,5 +1,5 @@
 # RCRemote
-Wireless iOS software to control the robot motion by Wifi
+Wireless IOS Software to Control Robot in Simulation  
 
 ![Demo Animation](images/VID_20240826_202208.gif)
 ![Demo Animation](images/VID_20240826_205943.gif)
