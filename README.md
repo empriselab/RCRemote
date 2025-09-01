@@ -138,4 +138,4 @@ After connections, start using it!
 9. **Axis Lock:** Lock one or more axis to make robot only move in exact way.
 
 ---
-Any problems? Contact me for support: ql342@cornell.edu
+Code support: ql342@cornell.edu
